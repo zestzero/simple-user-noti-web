@@ -2,6 +2,7 @@ import React from "react";
 import { GetServerSideProps, GetServerSidePropsContext, NextPage } from "next";
 // import useSWR from "swr";
 import { getGatewayUrl } from "services/gateway.service";
+import NavbarComponent from "components/Navbar/Navbar";
 // import fetch from 'unfetch'
 
 interface Props {
@@ -13,6 +14,7 @@ const Home: NextPage<Props> = ({ message }) => {
   // const { data } = useSWR<MessageResponse>('http://localhost:3000/api/message', fetcher);
   return message ? (
     <>
+      <NavbarComponent />
       <h1>Loaded from Nextjs</h1>
       <h2>message from gateway: {message}</h2>
     </>
