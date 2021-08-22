@@ -3,6 +3,8 @@ import { GetServerSideProps, GetServerSidePropsContext, NextPage } from "next";
 // import useSWR from "swr";
 import { getGatewayUrl } from "services/gateway.service";
 import NavbarComponent from "components/Navbar/Navbar";
+import Toasts from "components/Toasts/Toasts";
+import ToastsArea from "components/Toasts/ToastsArea";
 // import fetch from 'unfetch'
 
 interface Props {
@@ -12,14 +14,13 @@ interface Props {
 // const fetcher = (url: string) => fetch(url).then(r => r.json())
 const Home: NextPage<Props> = ({ message }) => {
   // const { data } = useSWR<MessageResponse>('http://localhost:3000/api/message', fetcher);
-  return message ? (
+  return (
     <>
       <NavbarComponent />
-      <h1>Loaded from Nextjs</h1>
-      <h2>message from gateway: {message}</h2>
+      <ToastsArea>
+      {message && <Toasts title="Message from Gateway" content={message} />}
+      </ToastsArea>
     </>
-  ) : (
-    <h1>Loading</h1>
   );
 };
 
