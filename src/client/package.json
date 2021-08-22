@@ -1,5 +1,9 @@
 {
   "scripts": {
     "build": "nest build && cd src/client && next build"
+  },
+  "dependencies": {
+    "bootstrap": "5.1.0",
+    "react-bootstrap": "^2.0.0-beta.5"
   }
 }

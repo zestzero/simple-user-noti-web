@@ -12,12 +12,14 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve"
+    "jsx": "preserve",
+    "baseUrl": "./"
   },
   "include": [
     "next-env.d.ts",
     "next.config.js",
     "components",
+    "services",
     "pages"
   ],
   "exclude": ["node_modules"]
