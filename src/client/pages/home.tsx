@@ -25,7 +25,7 @@ const Home: NextPage<Props> = ({ message }) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
-  const url = getGatewayUrl(context)('api/message');
+  const url = getGatewayUrl(context);
   const res = await fetch(url);
   const response = await res.json();
 
