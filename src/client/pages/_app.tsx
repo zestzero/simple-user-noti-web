@@ -1,11 +1,10 @@
+import { Provider } from 'react-redux';
 import type { ReactElement, ReactNode } from 'react'
-import type { GetServerSideProps, GetServerSidePropsContext, NextPage } from 'next'
+import type { NextPage } from 'next'
 import type { AppProps } from 'next/app'
-import { store } from 'app/store'
-import { Provider } from 'react-redux'
+import { store } from 'app/store';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { getGatewayUrl } from 'services/gateway.service'
 
 type NextPageWithLayout = NextPage & {
     getLayout?: (page: ReactElement) => ReactNode

@@ -1,37 +1,46 @@
 import React from "react";
 import { GetServerSideProps, GetServerSidePropsContext, NextPage } from "next";
-// import useSWR from "swr";
 import { getGatewayUrl } from "services/gateway.service";
 import NavbarComponent from "components/Navbar/Navbar";
 import Toasts from "components/Toasts/Toasts";
 import ToastsArea from "components/Toasts/ToastsArea";
-// import fetch from 'unfetch'
+import { useEffect } from "react";
+import { useAppDispatch } from 'app/hook';
+import { setup } from 'app/reducer';
+import TaskList from "components/Tasks/TaskList";
 
 interface Props {
   message: string;
+  gatewayUrl: string;
 }
 
-// const fetcher = (url: string) => fetch(url).then(r => r.json())
-const Home: NextPage<Props> = ({ message }) => {
-  // const { data } = useSWR<MessageResponse>('http://localhost:3000/api/message', fetcher);
+const Home: NextPage<Props> = ({ message, gatewayUrl }) => {
+  
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(setup({ gatewayUrl }));
+  }, []);
+
   return (
     <>
       <NavbarComponent />
+      <TaskList />
       <ToastsArea>
-      {message && <Toasts title="Message from Gateway" content={message} />}
+        {message && <Toasts title="Message from Gateway" content={message} />}
       </ToastsArea>
     </>
   );
 };
 
 export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
-  const url = getGatewayUrl(context);
+  const url = getGatewayUrl(context)('api/message');
   const res = await fetch(url);
   const response = await res.json();
 
   return {
     props: {
       message: response.message,
+      gatewayUrl: getGatewayUrl(context)(''),
     },
   };
 }

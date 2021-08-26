@@ -13,7 +13,7 @@ const commonSlice = createSlice({
     initialState,
     reducers: {
         setup(state, action: PayloadAction<CommonState>) {
-            state = action.payload;
+            return { ...state, ...action.payload };
         }
     }
 })
